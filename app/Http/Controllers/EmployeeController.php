@@ -16,13 +16,27 @@ class EmployeeController extends Controller
         //
 
         $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:50'],
+            'category_id' => ['nullable', 'string', 'max:50'],
             'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
 
         $limit = $validated['limit'] ?? 10;
 
-        $employees = Employee::query()->paginate($limit);
+        $query = Employee::query();
+        if ($search = $validated['search'] ?? null) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+        if ($category_id = $validated['category_id'] ?? null) {
+            if ($category_id == 1) {
+                $query->where('path', 'like', "%");
+            }
+            if ($category_id == 2) {
+                $query->where('path', '=', null);
+            }
+        }
+        $employees = $query->paginate($limit);
 
 
         return view('employee.index', compact('employees'));
