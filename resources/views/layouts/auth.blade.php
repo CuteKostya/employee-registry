@@ -3,7 +3,7 @@
 @section('main_content')
 
     <x-card>
-        @yield('content_auth')
+        @yield('auth.content')
     </x-card>
 
 @endsection
