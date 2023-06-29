@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,3 +51,13 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [LoginController::class, 'store'])
         ->name('login.store');
 });
+
+
+Route::get('surveys', [SurveyController::class, 'index'])
+    ->name('surveys');
+Route::get('surveys/create', [SurveyController::class, 'create'])
+    ->name('surveys.create');
+Route::post('surveys', [SurveyController::class, 'store'])
+    ->name('surveys.store');
+Route::get('surveys/{employee}', [SurveyController::class, 'show'])
+    ->name('surveys.show');
