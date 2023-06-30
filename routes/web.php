@@ -59,5 +59,5 @@ Route::get('surveys/create', [SurveyController::class, 'create'])
     ->name('surveys.create');
 Route::post('surveys', [SurveyController::class, 'store'])
     ->name('surveys.store');
-Route::get('surveys/{employee}', [SurveyController::class, 'show'])
+Route::get('surveys/{survey}', [SurveyController::class, 'show'])
     ->name('surveys.show');
