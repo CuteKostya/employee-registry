@@ -59,7 +59,5 @@ class ValidationController extends Controller
                 }
             ],
         ]);
-
-        dd($validated);
     }
 }
