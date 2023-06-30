@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('employees.create')}}">Create</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('surveys')}}">Survey</a>
+                    </li>
                 </ul>
             </div>
         </div>

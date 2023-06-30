@@ -22,4 +22,11 @@ class Question extends Model
             'type',
             'options'
         ];
+    public static array $rules
+        = [
+            'question' => ['nullable', 'string'],
+            'text' => ['nullable', 'string'],
+            'type' => ['nullable', 'string'],
+            'options' => ['nullable', 'string'],
+        ];
 }
