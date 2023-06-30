@@ -1,8 +1,10 @@
-@props(['value' => ''])
+@props(['value' => '', 'type' => 'text', 'id' => ''])
 
 <input {{ $attributes->class([
-    'form-control',
+    ($type == 'text' ? 'form-control' : ''),
+    (($type == 'checkbox' || $type == 'radio') ? 'form-check-input' : ''),
 ])->merge([
-    'type' => 'text',
-    'value'=>$value,
+    'type' => $type,
+    'value' => $value,
+    'id' => $id,
 ]) }}>
