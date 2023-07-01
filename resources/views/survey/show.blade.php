@@ -6,7 +6,7 @@
 @section('main_content')
     <div class="container">
         @foreach($questions as $question)
-            <x-survey.question :question="$question"/>
+            <x-survey.question :question="$question" :options="$options"/>
         @endforeach
     </div>
 @endsection

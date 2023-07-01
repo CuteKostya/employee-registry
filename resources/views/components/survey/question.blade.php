@@ -7,17 +7,16 @@
 
 @elseif($question->type == "checkbox")
 
-    <x-checks type="checkbox" id="{{$question->options}}"/>
+    @foreach($options as $option)
+        @if($option->questions_id == $question->id)
 
-
-    <div class="form-check">
-        <x-input type="checkbox" id="flexCheckDefault"/>
-        <x-label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
-        </x-label>
-    </div>
+            <x-checks type="checkbox" id="{{$option->option}}"/>
+            
+        @endif
+    @endforeach
 
 @elseif($question->type == "radio")
 
     <x-input type="radio" name="{{$question->id}}"/>
+
 @endif

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Option;
 use App\Models\Question;
 use App\Models\Survey;
 use Illuminate\Http\Request;
@@ -65,7 +66,14 @@ class SurveyController extends Controller
         $questions = Question::all()
             ->where('surveys_id', $id);
 
-        return view('survey.show', compact('questions'));
+        $query = Option::all();
+        foreach ($questions as $question) {
+            $query->where('questions_id', $question->id);
+        }
+
+        $options = $query;
+
+        return view('survey.show', compact('questions', 'options'));
     }
 
     /**
