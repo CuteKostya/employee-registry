@@ -1,22 +1,24 @@
-<h2>
-    {{ $question->question }}
-</h2>
-@if($question->type == "text")
+<x-form-item>
+    <h2>
+        {{ $question->question }}
+    </h2>
+    @if($question->type == "text")
 
-    <x-input type="text" name="{{$question->id}}"/>
+        <x-input type="text" name="{{$question->id}}"/>
 
-@elseif($question->type == "checkbox")
+    @elseif($question->type == "checkbox")
 
-    @foreach($options as $option)
-        @if($option->questions_id == $question->id)
+        @foreach($options as $option)
+            @if($option->questions_id == $question->id)
 
-            <x-checks type="checkbox" id="{{$option->option}}"/>
-            
-        @endif
-    @endforeach
+                <x-checks type="checkbox" id="{{$option->option}}"/>
 
-@elseif($question->type == "radio")
+            @endif
+        @endforeach
 
-    <x-input type="radio" name="{{$question->id}}"/>
+    @elseif($question->type == "radio")
 
-@endif
+        <x-input type="radio" name="{{$question->id}}"/>
+
+    @endif
+</x-form-item>
