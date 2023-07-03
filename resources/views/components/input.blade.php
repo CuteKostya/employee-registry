@@ -1,4 +1,4 @@
-@props(['value' => '', 'type' => 'text', 'id' => ''])
+@props(['value' => '', 'type' => 'text', 'name' => ''])
 
 <input {{ $attributes->class([
     ($type == 'text' ? 'form-control' : ''),
@@ -6,5 +6,5 @@
 ])->merge([
     'type' => $type,
     'value' => $value,
-    'id' => $id,
+    'name' => $name,
 ]) }}>

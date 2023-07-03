@@ -11,14 +11,17 @@
         @foreach($options as $option)
             @if($option->questions_id == $question->id)
 
-                <x-checks type="checkbox" id="{{$option->option}}"/>
+                <x-checks type="checkbox" name="{{$option->id}}}" value="{{$option->option}}"/>
 
             @endif
         @endforeach
 
     @elseif($question->type == "radio")
 
-        <x-input type="radio" name="{{$question->id}}"/>
-
+        @foreach($options as $option)
+            @if($option->questions_id == $question->id)
+                <x-checks type="radio" name="{{$question->id}}}" value="{{$option->option}}"/>
+            @endif
+        @endforeach
     @endif
 </x-form-item>

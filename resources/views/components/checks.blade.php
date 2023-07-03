@@ -1,8 +1,9 @@
-@props(['type' => 'checkbox', 'id' => ''])
+@props(['type' => 'checkbox',  'name' => '', 'value'=>''])
 
 
 <x-input {{ $attributes->merge([
     'type' => $type,
-    'id' => $id,
+    'name' =>$name,
+    'value'=>$value,
 ]) }} />
-<x-label>{{$id}}</x-label>
+<x-label>{{$value}}</x-label>
