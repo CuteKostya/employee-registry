@@ -19,6 +19,8 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        $date = $request->all();
+        dd($date);
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:50'],
             'email' => [

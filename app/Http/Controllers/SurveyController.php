@@ -56,7 +56,8 @@ class SurveyController extends Controller
     {
         //
 
-        dd($request);
+        $date = $request->all();
+        dd($date);
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:50'],
             'email' => [
