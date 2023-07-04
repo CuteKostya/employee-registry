@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->foreignId('questions_id')->constrained();
-            
+
             $table->string('option');
         });
     }

@@ -16,7 +16,9 @@ return new class extends Migration {
 
 
             $table->foreignId('defendants_id')->constrained();
-            $table->foreignId('question_id')->constrained();
+            $table->foreignId('questions_id')->constrained();
+
+            $table->string('text');
         });
     }
 
