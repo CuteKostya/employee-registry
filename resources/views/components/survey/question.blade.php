@@ -11,7 +11,7 @@
         @foreach($options as $option)
             @if($option->questions_id == $question->id)
 
-                <x-checks type="checkbox" name="{{$option->id}}}" value="{{$option->option}}"/>
+                <x-checks type="checkbox" name="{{$option->id}}" value="{{$option->option}}"/>
 
             @endif
         @endforeach
