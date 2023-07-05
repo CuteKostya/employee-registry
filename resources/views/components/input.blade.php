@@ -7,4 +7,5 @@
     'type' => $type,
     'value' => $value,
     'name' => $name,
+    'id' =>$value,
 ]) }}>

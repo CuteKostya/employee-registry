@@ -4,14 +4,20 @@
     </h2>
     @if($question->type == "text")
 
-        <x-input type="text" name="{{$question->id}}"/>
-
+        <label>
+            <label><input type="text" name="text[{{$question->id}}][]"/>
+            </label>
+        </label>
     @elseif($question->type == "checkbox")
 
         @foreach($options as $option)
             @if($option->questions_id == $question->id)
 
-                <x-checks type="checkbox" name="{{$option->id}}" value="{{$option->option}}"/>
+                <label>
+                    <label><input type="checkbox" name="checkBox[{{$question->id}}][]" value="{{$option->id}}"/>
+                        {{ $option->option }}
+                    </label>
+                </label>
 
             @endif
         @endforeach
@@ -20,7 +26,11 @@
 
         @foreach($options as $option)
             @if($option->questions_id == $question->id)
-                <x-checks type="radio" name="{{$question->id}}}" value="{{$option->option}}"/>
+                <label>
+                    <label><input type="radio" name="radio[{{$question->id}}][]" value="{{$option->id}}"/>
+                        {{ $option->option }}
+                    </label>
+                </label>
             @endif
         @endforeach
     @endif

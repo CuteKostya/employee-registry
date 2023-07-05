@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Defendant;
 use App\Models\Option;
+use App\Models\Option_answer;
 use App\Models\Question;
 use App\Models\Survey;
 use Illuminate\Http\Request;
@@ -56,8 +59,45 @@ class SurveyController extends Controller
     {
         //
 
-        $date = $request->all();
-        dd($date);
+        $text = $request->input('text');
+        $checkbox = $request->input('checkbox');
+        $radio = $request->input('radio');
+        $survey_id = $request->input('id');
+
+        $uri = $request->server('HTTP_REFERER');
+
+        url()->previous();
+        dd($request->all());
+        // defendants
+        $request->user('id');
+
+        Defendant::query()->create([
+            'user_id' => $validated['email'],
+            'surveys_id' => bcrypt($validated['password']),
+        ]);
+        //answers
+        $query = Answer::query();
+
+        $query->where('path', 'like', "%");
+        Answer::query()->create([
+            'defendants_id' => $validated['name'],
+            'question_id' => $validated['email'],
+            'text' => bcrypt($validated['password']),
+        ]);
+        //options_answers
+
+        Option_answer::query()->create([
+            'answes_id' => $validated['name'],
+            'options_id' => $validated['email'],
+        ]);
+
+        foreach ($text as $key => $item) {
+            dd($key, $item[0]);
+        }
+
+        Option_answer::query();
+
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:50'],
             'email' => [
@@ -68,6 +108,7 @@ class SurveyController extends Controller
             ],
             'agreement' => ['accepted'],
         ]);
+
 
         Survey::query()->create([
             'name' => $validated['name'],
@@ -94,7 +135,8 @@ class SurveyController extends Controller
 
         $options = $query;
 
-        return view('survey.show', compact('questions', 'options'));
+        return view('survey.show',
+            compact('questions', 'options', 'id'));
     }
 
     /**
