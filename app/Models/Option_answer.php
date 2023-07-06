@@ -16,7 +16,7 @@ class Option_answer extends Authenticatable
 
     protected $fillable
         = [
-            'answer_id', 'option_id', 'id',
+            'answers_id', 'options_id', 'id',
         ];
 
 

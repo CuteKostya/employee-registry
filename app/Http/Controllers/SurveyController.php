@@ -60,63 +60,58 @@ class SurveyController extends Controller
         //
 
         $text = $request->input('text');
-        $checkbox = $request->input('checkbox');
+        $checkbox = $request->input('checkBox');
         $radio = $request->input('radio');
         $survey_id = $request->input('id');
 
-        $uri = $request->server('HTTP_REFERER');
-
-        url()->previous();
-        dd($request->all());
         // defendants
-        $request->user('id');
 
-        Defendant::query()->create([
-            'user_id' => $validated['email'],
-            'surveys_id' => bcrypt($validated['password']),
-        ]);
-        //answers
-        $query = Answer::query();
-
-        $query->where('path', 'like', "%");
-        Answer::query()->create([
-            'defendants_id' => $validated['name'],
-            'question_id' => $validated['email'],
-            'text' => bcrypt($validated['password']),
-        ]);
-        //options_answers
-
-        Option_answer::query()->create([
-            'answes_id' => $validated['name'],
-            'options_id' => $validated['email'],
+        $defendant = Defendant::query()->create([
+            'users_id' => 1001,
+            'surveys_id' => $survey_id,
         ]);
 
-        foreach ($text as $key => $item) {
-            dd($key, $item[0]);
+        //answers text
+
+        foreach ($text as $id => $item) {
+            Answer::query()->create([
+                'defendants_id' => $defendant->id,
+                'questions_id' => $id,
+                'text' => $item[0],
+
+            ]);
         }
 
-        Option_answer::query();
+        //answers check
+        foreach ($checkbox as $id => $item) {
+            $answer = Answer::query()->create([
+                'defendants_id' => $defendant->id,
+                'questions_id' => $id,
+            ]);
 
 
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:50'],
-            'email' => [
-                'required', 'string', 'max:50', 'email', 'unique:users'
-            ],
-            'password' => [
-                'required', 'string', 'min:7', 'max:50', 'confirmed'
-            ],
-            'agreement' => ['accepted'],
-        ]);
+            Option_answer::query()->create([
+                'answers_id' => $answer->id,
+
+                'options_id' => $item[0],
+
+            ]);
+        }
+
+        foreach ($radio as $id => $item) {
+            $answer = Answer::query()->create([
+                'defendants_id' => $defendant->id,
+                'questions_id' => $id,
+            ]);
+
+            Option_answer::query()->create([
+                'answers_id' => $answer->id,
+                'options_id' => $item[0],
+            ]);
+        }
 
 
-        Survey::query()->create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-        ]);
-
-        return redirect()->route('home');
+        return redirect()->route('surveys');
     }
 
     /**

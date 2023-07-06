@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('option_answer', function (Blueprint $table) {
+        Schema::create('option_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -24,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('option_answer');
+        Schema::dropIfExists('option_answers');
     }
 };

@@ -12,8 +12,7 @@ class Defendant extends Model
     protected $fillable
         = [
             'id',
-            'user_id',
-            'survey_id',
-            
+            'users_id',
+            'surveys_id',
         ];
 }
