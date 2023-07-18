@@ -3,7 +3,6 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,29 +35,14 @@ Route::put('employees/{employee}', [EmployeeController::class, 'update'])
 Route::delete('employees/{employee}', [EmployeeController::class, 'delete'])
     ->name('employees.delete');
 
-Route::get('registration')
-    ->name('registration');
 
+Route::get('register', [RegisterController::class, 'index'])
+    ->middleware('guest')
+    ->name('register');
+Route::post('register', [RegisterController::class, 'store'])
+    ->name('register.store');
 
-Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisterController::class, 'index'])
-        ->middleware('guest')
-        ->name('register');
-    Route::post('register', [RegisterController::class, 'store'])
-        ->name('register.store');
-
-    Route::get('login', [LoginController::class, 'index'])
-        ->name('login');
-    Route::post('login', [LoginController::class, 'store'])
-        ->name('login.store');
-});
-
-
-Route::get('surveys', [SurveyController::class, 'index'])
-    ->name('surveys');
-Route::get('surveys/create', [SurveyController::class, 'create'])
-    ->name('surveys.create');
-Route::post('surveys', [SurveyController::class, 'store'])
-    ->name('surveys.store');
-Route::get('surveys/{survey}', [SurveyController::class, 'show'])
-    ->name('surveys.show');
+Route::get('login', [LoginController::class, 'index'])
+    ->name('login');
+Route::post('login', [LoginController::class, 'store'])
+    ->name('login.store');
